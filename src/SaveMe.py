@@ -761,5 +761,5 @@ def finalscreen():
     final.place(x=100, y=200)
 
 
-fifthscreen()  
+startscreen()  
 SaveMe.mainloop()
