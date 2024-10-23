@@ -399,11 +399,8 @@ def fifthscreen():
             return
 
         guess += 1
-        guess_history.append(guess_code)
         bulls, cows = calculate_bullscows(guess_code)
 
-        # res = Label(SaveMe, text=f"Bulls: {bulls}, Cows: {cows}", font=("Helvetica", 20), fg="white", bg="#1C1C1E")
-        # res.place(x=350, y=450)
 
         if bulls == 4:
             messagebox.showinfo("GUESSED IT!", f"You guessed the code {code} in {guess} attempts!")
@@ -414,8 +411,16 @@ def fifthscreen():
         else:
             # res.config(text=f"Bulls: {bulls} , Cows: {cows}")
             res = Label(SaveMe, text=f"Bulls: {bulls}, Cows: {cows}", font=("Helvetica", 20), fg="white", bg="#1C1C1E")
-            res.place(x=350, y=450)
-            giveup.place(x=400,y=500)
+            guess_history.append(f"{guess_code} -> Bulls: {bulls}, Cows: {cows}")
+            text = ""
+            for i in guess_history:
+                text += i+'\n'
+           
+            res = Label(SaveMe, text=text, font=("Helvetica", 20), fg="white", bg="#1C1C1E")
+
+            res.place(x=300, y=450)
+            giveup.place(x=500,y=400)
+            
     def calculate_bullscows(guess_code):
         nonlocal code
         bulls = sum(1 for i in range(4) if guess_code[i] == code[i])
